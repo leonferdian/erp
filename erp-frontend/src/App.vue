@@ -2,30 +2,53 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
-const message = ref("");
+// const users = ref([]);
+// const name = ref("");
+// const email = ref("");
+// const password = ref("");
 
-onMounted(async () => {
-  const res = await axios.get("http://localhost:5000");
-  message.value = res.data.message;
-});
+// onMounted(async () => {
+//   const res = await axios.get("http://localhost:5000/api/users");
+//   users.value = res.data;
+// });
 
-const users = ref([]);
-
-onMounted(async () => {
-  const res = await axios.get("http://localhost:5000/api/users");
-  users.value = res.data;
-});
+// const addUser = async () => {
+//   const res = await axios.post("http://localhost:5000/api/users", {
+//     name: name.value,
+//     email: email.value,
+//     password: password.value
+//   });
+//   users.value.push(res.data);
+//   name.value = "";
+//   email.value = "";
+//   password.value = "";
+// };
 </script>
 
-<template>
+<!-- <template>
   <div class="p-6">
     <h1 class="text-2xl font-bold">ERP Frontend</h1>
-    <p>Backend says: {{ message }}</p>
-    
-    <h2>User List</h2>
+
+    <form @submit.prevent="addUser" class="my-4">
+      <input v-model="name" placeholder="Name" class="border p-2 m-1"/>
+      <input v-model="email" placeholder="Email" class="border p-2 m-1"/>
+      <input v-model="password" type="password" placeholder="Password" class="border p-2 m-1"/>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add User</button>
+    </form>
+
     <ul>
-      <li v-for="u in users" :key="u.id">{{ u.name }}</li>
+      <li v-for="u in users" :key="u._id">{{ u.name }} - {{ u.email }}</li>
     </ul>
+  </div>
+</template> -->
+
+<template>
+  <div>
+    <h1 class="text-2xl font-bold">ERP System</h1>
+    <router-link to="/login" class="text-blue-500">Login</router-link> |
+    <router-link to="/dashboard" class="text-blue-500">Dashboard</router-link>
+    <hr />
+    <router-view />
   </div>
 </template>
 
