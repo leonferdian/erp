@@ -11,6 +11,11 @@
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Welcome Back</h2>
       <p class="text-center text-gray-500 text-sm mb-6">Login to continue</p>
 
+      <!-- Error Message -->
+      <div v-if="error" class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+        {{ error }}
+      </div>
+
       <!-- Form -->
       <form @submit.prevent="handleLogin" class="space-y-5">
         <!-- Email -->
@@ -20,7 +25,8 @@
             type="email"
             v-model="email"
             required
-            class="w-full px-4 py-2 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            :disabled="isLoading"
+            class="w-full px-4 py-2 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
             placeholder="Enter your email"
           />
         </div>
@@ -33,13 +39,15 @@
               :type="showPassword ? 'text' : 'password'"
               v-model="password"
               required
-              class="w-full px-4 py-2 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              :disabled="isLoading"
+              class="w-full px-4 py-2 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
               placeholder="Enter your password"
             />
             <button
               type="button"
               @click="showPassword = !showPassword"
-              class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600"
+              :disabled="isLoading"
+              class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed"
             >
               <span v-if="showPassword">🙈</span>
               <span v-else>👁️</span>
@@ -50,9 +58,16 @@
         <!-- Submit -->
         <button
           type="submit"
-          class="w-full bg-indigo-600 text-white py-2.5 rounded-xl shadow-md hover:bg-indigo-700 transition font-medium"
+          :disabled="isLoading"
+          class="w-full bg-indigo-600 text-white py-2.5 rounded-xl shadow-md hover:bg-indigo-700 transition font-medium disabled:bg-indigo-400 disabled:cursor-not-allowed flex items-center justify-center"
         >
-          Login
+          <span v-if="isLoading" class="mr-2">
+            <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </span>
+          {{ isLoading ? 'Logging in...' : 'Login' }}
         </button>
       </form>
 
@@ -67,25 +82,26 @@
 
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
 import { useRouter } from "vue-router";
+import { useAuth } from "../composables/useAuth";
 
 const router = useRouter();
+const { login, isLoading, error, clearError } = useAuth();
+
 const email = ref("");
 const password = ref("");
 const showPassword = ref(false);
 
 const handleLogin = async () => {
-  try {
-    const res = await axios.post("http://localhost:5000/api/auth/login", {
-      email: email.value,
-      password: password.value,
-    });
-
-    localStorage.setItem("token", res.data.token);
+  clearError();
+  
+  const result = await login(email.value, password.value);
+  
+  if (result.success) {
     router.push("/dashboard");
-  } catch (err) {
-    alert(err.response?.data?.error || "Login gagal");
+  } else {
+    // Error will be displayed via the error state
+    console.error("Login failed:", result.error);
   }
 };
 </script>
