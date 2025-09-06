@@ -43,13 +43,7 @@ import axios from "axios";
 </template> -->
 
 <template>
-  <div>
-    <h1 class="text-2xl font-bold">ERP System</h1>
-    <!-- <router-link to="/login" class="text-blue-500">Login</router-link> |
-    <router-link to="/dashboard" class="text-blue-500">Dashboard</router-link> -->
-    <hr />
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <style scoped>

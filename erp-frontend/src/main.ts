@@ -14,7 +14,7 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-import "./style.css";
+import "./assets/style.css";
 
 const app = createApp(App);
 app.use(router);
