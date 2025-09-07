@@ -2,10 +2,11 @@ services:
   backend:
     build: ./erp-backend
     ports:
-      - "5000:5000"
+      - "3000:3000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/erp_db
+      - MONGODB_URI=mongodb://mongo:27017/erp_db
       - JWT_SECRET=supersecret
+      - NODE_ENV=production
     depends_on:
       - mongo
 
@@ -14,7 +15,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=http://backend:5000
+      - VITE_API_URL=http://backend:3000
     depends_on:
       - backend
 

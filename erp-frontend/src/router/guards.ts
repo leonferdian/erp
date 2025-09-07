@@ -36,3 +36,20 @@ export const adminGuard = (_to: any, _from: any, next: any) => {
     next('/dashboard');
   }
 };
+
+export const customerGuard = (_to: any, _from: any, next: any) => {
+  // Check if user is authenticated
+  if (!authService.isAuthenticated()) {
+    next('/login');
+    return;
+  }
+  
+  // Check if user is customer
+  const user = authService.getCurrentUser();
+  if (user && (user.role === 'customer' || user.role === 'user')) {
+    next();
+  } else {
+    // Redirect to admin dashboard if admin
+    next('/admin/dashboard');
+  }
+};

@@ -1,49 +1,69 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import userRoutes from "./routes/userRoutes.js";
-import authRoutes from "./routes/authRoutes.js";
-import { protect } from "./middleware/authMiddleware.js";
+import express from 'express'
+import mongoose from 'mongoose'
+import cors from 'cors'
+import dotenv from 'dotenv'
 
-dotenv.config();
+// Load environment variables
+dotenv.config()
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const app = express()
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/erp_db";
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected to:", MONGO_URI))
-  .catch((err) => console.error("❌ MongoDB connection error:", err.message));
-
-
-// MongoDB connection
-// const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/erp_db";
-// mongoose.connect(MONGO_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-// .then(() => console.log("✅ MongoDB connected"))
-// .catch((err) => console.error("❌ MongoDB error:", err));
-
-// const MONGO_URI = "mongodb://127.0.0.1:27017/erp_db";
-// mongoose.connect(MONGO_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-// .then(() => console.log("✅ MongoDB connected to:", MONGO_URI))
-// .catch((err) => console.error("❌ MongoDB connection error:", err.message));
+// Middleware
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 // Routes
-app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/users", protect, userRoutes);
+import authRoutes from './routes/auth.js'
+import userRoutes from './routes/users.js'
+import productRoutes from './routes/products.js'
+import orderRoutes from './routes/orders.js'
+import paymentRoutes from './routes/payments.js'
+import deliveryRoutes from './routes/delivery.js'
+import notificationRoutes from './routes/notifications.js'
+import analyticsRoutes from './routes/analytics.js'
 
-app.get("/", (req, res) => {
-  res.json({ message: "ERP Backend Running 🚀" });
-});
+app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/orders', orderRoutes)
+app.use('/api/payments', paymentRoutes)
+app.use('/api/delivery', deliveryRoutes)
+app.use('/api/notifications', notificationRoutes)
+app.use('/api/analytics', analyticsRoutes)
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() })
+})
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).json({ message: 'Something went wrong!' })
+})
+
+// 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({ message: 'Route not found' })
+})
+
+// Database connection
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/erp', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Connected to MongoDB')
+})
+.catch((error) => {
+  console.error('MongoDB connection error:', error)
+})
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+
+export default app

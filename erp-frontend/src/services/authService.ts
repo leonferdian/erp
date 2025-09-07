@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { config } from '../config/env';
+import { getDemoUser } from '../data/demoUsers';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = config.API_URL;
 
 // Create axios instance with default config
 const api = axios.create({
@@ -71,7 +73,38 @@ api.interceptors.response.use(
 export const authService = {
   // Login user
   async login(email: string, password: string) {
+    console.log('AuthService.login called with:', { email, password });
+    
     try {
+      // Check demo users first
+      console.log('Checking demo users...');
+      const demoUser = getDemoUser(email, password);
+      console.log('Demo user found:', demoUser);
+      
+      if (demoUser) {
+        const mockToken = 'demo_token_' + Date.now();
+        const userData = {
+          id: demoUser.email,
+          email: demoUser.email,
+          firstName: demoUser.firstName,
+          lastName: demoUser.lastName,
+          role: demoUser.role,
+          avatar: null
+        };
+        
+        console.log('Storing demo user data:', userData);
+        
+        // Store tokens and user data
+        localStorage.setItem('token', mockToken);
+        localStorage.setItem('refreshToken', 'demo_refresh_token');
+        localStorage.setItem('user', JSON.stringify(userData));
+        
+        console.log('Demo login successful');
+        return { success: true, data: { token: mockToken, user: userData } };
+      }
+
+      // Try backend API if demo user not found
+      console.log('Demo user not found, trying backend API...');
       const response = await api.post('/auth/login', { email, password });
       const { token, refreshToken, ...userData } = response.data;
       
@@ -80,8 +113,10 @@ export const authService = {
       localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('user', JSON.stringify(userData));
       
+      console.log('Backend login successful');
       return { success: true, data: response.data };
     } catch (error: any) {
+      console.error('Login error:', error);
       return { 
         success: false, 
         error: error.response?.data?.error || 'Login failed' 
@@ -120,8 +155,13 @@ export const authService = {
     const token = localStorage.getItem('token');
     if (!token) return false;
     
+    // Handle demo tokens
+    if (token.startsWith('demo_token_')) {
+      return true;
+    }
+    
     try {
-      // Decode token to check expiration
+      // Decode JWT token to check expiration
       const payload = JSON.parse(atob(token.split('.')[1]));
       const currentTime = Date.now() / 1000;
       return payload.exp > currentTime;
@@ -133,6 +173,16 @@ export const authService = {
   // Get token
   getToken() {
     return localStorage.getItem('token');
+  },
+
+  // Set token
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  },
+
+  // Set user
+  setUser(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
   },
 
   // Refresh token

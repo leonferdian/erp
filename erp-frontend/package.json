@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.13",
+    "@vueuse/core": "^13.9.0",
     "axios": "^1.11.0",
     "daisyui": "^5.1.6",
+    "google-auth-library": "^10.3.0",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },
