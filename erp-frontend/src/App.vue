@@ -61,31 +61,61 @@ const isAuthRoute = computed(() => {
               >
                 Dashboard
               </router-link>
-              
-              <router-link
-                to="/shop"
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                active-class="border-indigo-500 text-gray-900"
-              >
-                Shop
-              </router-link>
-              
-              <router-link
-                to="/orders"
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                active-class="border-indigo-500 text-gray-900"
-              >
-                Orders
-              </router-link>
 
-              <!-- Admin Links -->
+              <!-- Admin Menu -->
               <template v-if="user?.role === 'admin'">
                 <router-link
-                  to="/admin/dashboard"
+                  to="/admin/users"
                   class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   active-class="border-indigo-500 text-gray-900"
                 >
-                  Admin
+                  Users
+                </router-link>
+                <router-link
+                  to="/admin/products"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Products
+                </router-link>
+                <router-link
+                  to="/admin/orders"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Orders
+                </router-link>
+                <router-link
+                  to="/admin/analytics"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Analytics
+                </router-link>
+              </template>
+
+              <!-- Customer Menu -->
+              <template v-else>
+                <router-link
+                  to="/shop"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Shop
+                </router-link>
+                <router-link
+                  to="/orders"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  My Orders
+                </router-link>
+                <router-link
+                  to="/profile"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Profile
                 </router-link>
               </template>
             </div>
@@ -261,33 +291,68 @@ const isAuthRoute = computed(() => {
           >
             Dashboard
           </router-link>
-          
-          <router-link
-            to="/shop"
-            class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-            active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
-            @click="showMobileMenu = false"
-          >
-            Shop
-          </router-link>
-          
-          <router-link
-            to="/orders"
-            class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-            active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
-            @click="showMobileMenu = false"
-          >
-            Orders
-          </router-link>
 
+          <!-- Admin Mobile Menu -->
           <template v-if="user?.role === 'admin'">
             <router-link
-              to="/admin/dashboard"
+              to="/admin/users"
               class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
               active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
               @click="showMobileMenu = false"
             >
-              Admin
+              Users
+            </router-link>
+            <router-link
+              to="/admin/products"
+              class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+              active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
+              @click="showMobileMenu = false"
+            >
+              Products
+            </router-link>
+            <router-link
+              to="/admin/orders"
+              class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+              active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
+              @click="showMobileMenu = false"
+            >
+              Orders
+            </router-link>
+            <router-link
+              to="/admin/analytics"
+              class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+              active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
+              @click="showMobileMenu = false"
+            >
+              Analytics
+            </router-link>
+          </template>
+
+          <!-- Customer Mobile Menu -->
+          <template v-else>
+            <router-link
+              to="/shop"
+              class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+              active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
+              @click="showMobileMenu = false"
+            >
+              Shop
+            </router-link>
+            <router-link
+              to="/orders"
+              class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+              active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
+              @click="showMobileMenu = false"
+            >
+              My Orders
+            </router-link>
+            <router-link
+              to="/profile"
+              class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+              active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
+              @click="showMobileMenu = false"
+            >
+              Profile
             </router-link>
           </template>
         </div>
