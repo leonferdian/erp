@@ -1,46 +1,5 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Navigation Bar -->
-    <nav class="bg-white shadow-sm border-b">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex items-center">
-            <router-link to="/dashboard" class="text-xl font-bold text-gray-900">ERP System</router-link>
-            <span class="ml-4 px-2 py-1 text-xs font-medium bg-indigo-100 text-indigo-800 rounded-full">
-              Admin
-            </span>
-          </div>
-          <div class="flex items-center space-x-4">
-            <!-- Notifications -->
-            <button class="relative p-2 text-gray-400 hover:text-gray-500">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-6H4v6zM4 5h6V1H4v4zM15 7h5l-5-5v5z"></path>
-              </svg>
-              <span v-if="notificationCount > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {{ notificationCount }}
-              </span>
-            </button>
-            
-            <!-- User Menu -->
-            <div class="relative">
-              <button @click="showDropdown = !showDropdown" class="flex items-center space-x-2 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <img class="h-8 w-8 rounded-full" :src="user?.avatar || defaultAvatar" alt="User avatar">
-                <span class="text-gray-700">{{ user?.name || 'Admin' }}</span>
-                <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-              <div v-if="showDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                <router-link to="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</router-link>
-                <router-link to="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</router-link>
-                <router-link to="/admin/notifications" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Notifications</router-link>
-                <a @click="logout" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
 
     <div class="flex">
       <!-- Sidebar -->
