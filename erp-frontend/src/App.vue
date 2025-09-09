@@ -87,6 +87,48 @@ const isAuthRoute = computed(() => {
                 >
                   Admin
                 </router-link>
+                <router-link
+                  to="/admin/users"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Users
+                </router-link>
+                <router-link
+                  to="/admin/products"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Products
+                </router-link>
+                <router-link
+                  to="/admin/inventory"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Inventory
+                </router-link>
+                <router-link
+                  to="/admin/orders"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Admin Orders
+                </router-link>
+                <router-link
+                  to="/admin/analytics"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Analytics
+                </router-link>
+                <router-link
+                  to="/admin/notifications"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Notifications
+                </router-link>
               </template>
             </div>
           </div>
