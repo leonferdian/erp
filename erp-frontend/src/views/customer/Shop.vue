@@ -5,7 +5,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <router-link to="/dashboard" class="text-xl font-bold text-gray-900">ERP System</router-link>
+            <router-link to="/dashboard" class="hidden">ERP System</router-link>
           </div>
           <div class="flex items-center space-x-4">
             <!-- Search Bar -->
@@ -34,7 +34,7 @@
             </router-link>
             
             <!-- User Menu -->
-            <div class="relative">
+            <div class="relative hidden">
               <button @click="showDropdown = !showDropdown" class="flex items-center space-x-2 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <img class="h-8 w-8 rounded-full" :src="user?.avatar || defaultAvatar" alt="User avatar">
                 <span class="text-gray-700">{{ user?.name || 'User' }}</span>
@@ -464,8 +464,13 @@ onMounted(() => {
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  -ms-line-clamp: 2;
   -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  max-height: 3em; /* Fallback for browsers that don't support line-clamp */
 }
 </style>
 
