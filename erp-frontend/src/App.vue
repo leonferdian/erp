@@ -45,10 +45,17 @@ const isAuthRoute = computed(() => {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex">
-            <!-- Logo -->
+            <!-- Logo - Hidden -->
             <div class="flex-shrink-0 flex items-center">
-              <router-link to="/dashboard" class="text-xl font-bold text-gray-900">
-                ERP System
+              <router-link to="/dashboard" class="flex items-center group transition-all duration-300">
+                <img 
+                  src="./assets/image/G9lTrJxk_400x400.png" 
+                  alt="Logo"
+                  class="w-8 h-8 rounded-full object-cover transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(37,99,235,0.7)]"
+                />
+                <span class="ml-2 text-xl font-bold text-blue-900 group-hover:text-blue-700 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(37,99,235,0.6)]">
+                  Octopus
+                </span>
               </router-link>
             </div>
 
@@ -219,12 +226,10 @@ const isAuthRoute = computed(() => {
               </div>
             </div>
 
-            <!-- User dropdown -->
             <div class="relative" v-if="user">
               <button
                 @click.stop="showUserDropdown = !showUserDropdown"
-                class="flex items-center space-x-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-              >
+                class="flex items-center space-x-2 text-gray-500 hover:text-gray-700 focus:outline-none">
                 <div class="h-8 w-8 rounded-full overflow-hidden bg-indigo-500 flex items-center justify-center">
                   <img 
                     v-if="user?.avatar" 
@@ -250,7 +255,7 @@ const isAuthRoute = computed(() => {
               >
                 <div class="px-4 py-2 border-b border-gray-100">
                   <p class="text-sm font-medium text-gray-900">{{ user?.firstName }} {{ user?.lastName }}</p>
-                  <p class="text-sm text-gray-500">{{ user?.email }}</p>
+                  <p class="text-sm text-gray-500 truncate">{{ user?.email }}</p>
                 </div>
                 <router-link
                   to="/profile"
@@ -266,11 +271,21 @@ const isAuthRoute = computed(() => {
                 >
                   Settings
                 </router-link>
+                <div class="border-t border-gray-100 my-1"></div>
+                <router-link
+                  v-if="user.role === 'admin'"
+                  to="/admin"
+                  class="block px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100"
+                  @click="showUserDropdown = false"
+                >
+                  Admin Dashboard
+                </router-link>
+                <div class="border-t border-gray-100 my-1"></div>
                 <button
                   @click="logout"
-                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                 >
-                  Logout
+                  Sign out
                 </button>
               </div>
             </div>
