@@ -71,60 +71,7 @@ const isAuthRoute = computed(() => {
 
               <!-- Admin Menu -->
               <template v-if="user?.role === 'admin'">
-                <router-link
-                  to="/admin/users"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  active-class="border-indigo-500 text-gray-900"
-                >
-                  Users
-                </router-link>
-                <router-link
-                  to="/admin/products"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  active-class="border-indigo-500 text-gray-900"
-                >
-                  Products
-                </router-link>
-                <router-link
-                  to="/admin/orders"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  active-class="border-indigo-500 text-gray-900"
-                >
-                  Orders
-                </router-link>
-                <router-link
-                  to="/admin/analytics"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  active-class="border-indigo-500 text-gray-900"
-                >
-                  Analytics
-                </router-link>
-              </template>
-
-              <!-- Customer Menu -->
-              <template v-else>
-                <router-link
-                  to="/shop"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  active-class="border-indigo-500 text-gray-900"
-                >
-                  Shop
-                </router-link>
-                <router-link
-                  to="/orders"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  active-class="border-indigo-500 text-gray-900"
-                >
-                  My Orders
-                </router-link>
-                <router-link
-                  to="/profile"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  active-class="border-indigo-500 text-gray-900"
-                >
-                  Profile
-                </router-link>
-                <router-link
+               <router-link
                   to="/admin/users"
                   class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   active-class="border-indigo-500 text-gray-900"
@@ -150,7 +97,21 @@ const isAuthRoute = computed(() => {
                   class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   active-class="border-indigo-500 text-gray-900"
                 >
-                  Admin Orders
+                  Orders
+                </router-link>
+                <router-link
+                  to="/admin/financial"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Finance
+                </router-link>
+                <router-link
+                  to="/admin/reports"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Report
                 </router-link>
                 <router-link
                   to="/admin/analytics"
@@ -161,10 +122,35 @@ const isAuthRoute = computed(() => {
                 </router-link>
                 <router-link
                   to="/admin/notifications"
-                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  class="hide border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   active-class="border-indigo-500 text-gray-900"
                 >
                   Notifications
+                </router-link>
+              </template>
+
+              <!-- Customer Menu -->
+              <template v-else>
+                <router-link
+                  to="/shop"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Shop
+                </router-link>
+                <router-link
+                  to="/orders"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  My Orders
+                </router-link>
+                <router-link
+                  to="/profile"
+                  class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  active-class="border-indigo-500 text-gray-900"
+                >
+                  Profile
                 </router-link>
               </template>
             </div>
@@ -373,7 +359,7 @@ const isAuthRoute = computed(() => {
               active-class="bg-indigo-50 border-indigo-500 text-indigo-700"
               @click="showMobileMenu = false"
             >
-              Orders
+              Admin Orders
             </router-link>
             <router-link
               to="/admin/analytics"
