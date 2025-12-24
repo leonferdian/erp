@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@grafana/faro-web-sdk": "^2.1.0",
+    "@grafana/faro-web-tracing": "^2.1.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@vueuse/core": "^13.9.0",
     "axios": "^1.11.0",

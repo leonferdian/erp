@@ -3,6 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 
+// Initialize Grafana Faro for performance monitoring (must be before app creation)
+import { initializeGrafana } from "./config/grafana";
+initializeGrafana();
+
 // Tambahkan interceptor sekali di sini
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");

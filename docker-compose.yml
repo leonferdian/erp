@@ -11,11 +11,15 @@ services:
       - mongo
 
   frontend:
-    build: ./erp-frontend
+    build:
+      context: ./erp-frontend
+      args:
+        - VITE_API_URL=http://backend:3000
+        - VITE_GRAFANA_FARO_URL=https://faro-collector-prod-ap-southeast-2.grafana.net/collect/f0f36f87dc7efeb4720f28adae0c0719
+        - VITE_GRAFANA_FARO_APP_NAME=Ocean Market
+        - VITE_GRAFANA_FARO_ENVIRONMENT=production
     ports:
       - "5173:5173"
-    environment:
-      - VITE_API_URL=http://backend:3000
     depends_on:
       - backend
 

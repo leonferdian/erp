@@ -7,7 +7,7 @@
         <div class="px-4 py-5 sm:p-6">
           <div class="text-center">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
-            <p class="text-lg text-gray-600">Selamat datang di ERP Dashboard! 🎉</p>
+            <p class="text-lg text-gray-600">Selamat datang di Ocean Market! 🎉</p>
           </div>
         </div>
       </div>
